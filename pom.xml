@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.evolutionnext</groupId>
-    <artifactId>basic-app</artifactId>
+    <artifactId>next-gen-testing-tools-java</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>basic-app</name>
-    <url>https://github.com/dhinojosa/basic-java-template</url>
+    <name>${project.artifactId}</name>
+    <url>https://github.com/dhinojosa/next-gen-testing-tools-java</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
