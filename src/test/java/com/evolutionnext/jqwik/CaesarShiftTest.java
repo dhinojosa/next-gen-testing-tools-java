@@ -140,4 +140,16 @@ public class CaesarShiftTest {
         String result = CaesarShift.decode("a", 1);
         assertThat(result).isEqualTo("z");
     }
+
+    @Test
+    void testEncodeWithMinValueShift() {
+        String encode = CaesarShift.encode("A", -2147483648);
+        assertThat(encode).isEqualTo("C");
+    }
+
+    @Test
+    void testDecodeWithMinValueShift() {
+        String encode = CaesarShift.decode("C", -2147483648);
+        assertThat(encode).isEqualTo("A");
+    }
 }

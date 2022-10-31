@@ -12,5 +12,5 @@ public interface StudentDAO<A> {
     List<Student> findByFirstName(String firstName);
     List<Student> findByLastName(String lastName);
     Optional<Student> findByStudentId(StudentId studentId);
-    Optional<Student> findById(Long id);
+    Optional<Student> findById(A id);
 }

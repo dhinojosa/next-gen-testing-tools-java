@@ -16,7 +16,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class MockerServerTest {
+public class MockServerTest {
 
     private static ClientAndServer mockServer;
 

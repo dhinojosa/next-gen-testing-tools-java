@@ -20,10 +20,11 @@ public class CaesarShift {
     private static char shiftChar(int shift, char c) {
         if (!Character.isAlphabetic(c)) return c;
         char preferredA = Character.isUpperCase(c) ? LARGE_A : SMALL_A;
-        return (char) ((c - preferredA + ((shift % ALPHA_SIZE) + ALPHA_SIZE)) % ALPHA_SIZE + preferredA);
+        int preferredShift = (shift % ALPHA_SIZE) + ALPHA_SIZE;
+        return (char) ((c - preferredA + preferredShift) % ALPHA_SIZE + preferredA);
     }
 
     public static String decode(String word, int shift) {
-        return encode(word, -shift);
+        return encode(word, -(shift % ALPHA_SIZE));
     }
 }
