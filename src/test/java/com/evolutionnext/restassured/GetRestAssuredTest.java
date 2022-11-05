@@ -1,14 +1,17 @@
 package com.evolutionnext.restassured;
 
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
+import org.mockserver.matchers.Times;
 import org.mockserver.model.MediaType;
 
 import java.util.Map;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -16,7 +19,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class RestAssuredTest {
+public class GetRestAssuredTest {
 
     private static final String data = """
         {
@@ -50,7 +53,7 @@ public class RestAssuredTest {
             .when(
                 request()
                     .withMethod("GET")
-                    .withPath("/lotto/5")
+                    .withPath("/lotto/5"), Times.exactly(2)
             )
             .respond(
                 response()
@@ -80,9 +83,22 @@ public class RestAssuredTest {
             .then()
             .statusCode(200)
             .extract()
-            .as(new TypeRef<>() {});
+            .as(new TypeRef<>() {
+            });
 
-        System.out.println(result.get("lotto"));
+        System.out.println(result);
+    }
+
+    @Test
+    void testCallingRestContentAsPost() {
+        given()
+            .contentType(ContentType.JSON)
+            .body("{\"username\": \"foo\", \"password\": \"bar\"}")
+            .when()
+            .post("http://localhost:1080/login")
+            .then()
+            .statusCode(201)
+            .body(equalTo("Accepted"));
     }
 
     @AfterAll

@@ -76,6 +76,7 @@ public class AwaitilityTest {
         await().untilAsserted(() -> assertThat(integerFuture.get()).isEqualTo(30));
     }
 
+
     @Test
     void testWithTimeout() {
 

@@ -7,9 +7,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,17 +18,18 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
+@Testcontainers
 public class StudentDAOIntegrationTest {
 
     public static PostgreSQLStudentDAO postgreSQLStudentDAO;
-    private static PostgreSQLContainer<?> postgreSQLContainer;
+    @SuppressWarnings("resource")
+    @Container
+    private static final PostgreSQLContainer<?> postgreSQLContainer =
+        new PostgreSQLContainer<>("postgres:14.5")
+        .withDatabaseName("school");
 
     @BeforeAll
     static void setUp() {
-        postgreSQLContainer = new PostgreSQLContainer<>("postgres:14.5");
-        postgreSQLContainer.withDatabaseName("school");
-        postgreSQLContainer.start();
-
         org.postgresql.ds.PGConnectionPoolDataSource source =
             new org.postgresql.ds.PGConnectionPoolDataSource();
         source.setURL(postgreSQLContainer.getJdbcUrl());
@@ -158,6 +160,8 @@ public class StudentDAOIntegrationTest {
     }
 
 
+
+
     @AfterEach
     void tearDown() throws SQLException {
         postgreSQLStudentDAO.deleteAll();
@@ -165,6 +169,6 @@ public class StudentDAOIntegrationTest {
 
     @AfterAll
     static void afterAll() {
-        postgreSQLContainer.close();
+//        postgreSQLContainer.close();
     }
 }
