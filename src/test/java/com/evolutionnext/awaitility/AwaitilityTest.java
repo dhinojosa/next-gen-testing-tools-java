@@ -75,10 +75,4 @@ public class AwaitilityTest {
     void testBasicFutureWithAwaitilityAndForcingAssertJ() {
         await().untilAsserted(() -> assertThat(integerFuture.get()).isEqualTo(30));
     }
-
-
-    @Test
-    void testWithTimeout() {
-
-    }
 }

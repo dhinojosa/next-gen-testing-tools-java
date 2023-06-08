@@ -27,37 +27,39 @@ public class MockServerTest {
 
     @Test
     void testResponse() throws IOException, InterruptedException {
-        new MockServerClient("localhost", 1080)
-            .when(
-                request()
-                    .withMethod("POST")
-                    .withPath("/login")
-                    .withBody("{username: 'foo', password: 'bar'}")
-            )
-            .respond(
-                response()
-                    .withStatusCode(302)
-                    .withCookie(
-                        "sessionId", "2By8LOhBmaW5nZXJwcmludCIlMDAzMW"
-                    )
-                    .withHeader(
-                        "Location", "https://www.mock-server.com"
-                    )
-            );
+        try (var mockServerClient = new MockServerClient("localhost", 1080)) {
+            mockServerClient
+                .when(
+                    request()
+                        .withMethod("POST")
+                        .withPath("/login")
+                        .withBody("{username: 'foo', password: 'bar'}")
+                )
+                .respond(
+                    response()
+                        .withStatusCode(302)
+                        .withCookie(
+                            "sessionId", "2By8LOhBmaW5nZXJwcmludCIlMDAzMW"
+                        )
+                        .withHeader(
+                            "Location", "https://www.mock-server.com"
+                        )
+                );
 
-        HttpClient httpClient = HttpClient.newBuilder().build();
+            HttpClient httpClient = HttpClient.newBuilder().build();
 
-        HttpRequest httpRequest = HttpRequest
-            .newBuilder(URI.create("http://localhost:1080/login"))
-            .POST(HttpRequest.BodyPublishers.ofString("{username: 'foo', " +
-                "password: 'bar'}"))
-            .build();
+            HttpRequest httpRequest = HttpRequest
+                .newBuilder(URI.create("http://localhost:1080/login"))
+                .POST(HttpRequest.BodyPublishers.ofString("{username: 'foo', " +
+                    "password: 'bar'}"))
+                .build();
 
-        HttpResponse<String> response = httpClient.send(httpRequest,
-            HttpResponse.BodyHandlers.ofString());
-        System.out.println(">>>" + response.body());
-        System.out.println(">>>" + response.statusCode());
-        System.out.println(">>>" + response.headers());
+            HttpResponse<String> response = httpClient.send(httpRequest,
+                HttpResponse.BodyHandlers.ofString());
+            System.out.format("Body: %s%n", response.body());
+            System.out.format("Status Code: %s%n", response.statusCode());
+            System.out.format("Headers: %s%n", response.headers());
+        }
     }
 
     @AfterAll
