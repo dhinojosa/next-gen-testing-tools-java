@@ -1,9 +1,8 @@
-# basic-java-template
-Basic Java Template with Slf4j, Log4j, Junit Jupiter, Jacoco, AssertJ, JQwik
+# Next Gen Testing Tools for Java
 
-
-## Steps to use
-
-1. Select use template
-2. Create your repository
-3. Clone your repository
+Examples including:
+1. Rest-Assured
+2. JQwik
+3. Test Containers
+4. Mock Server
+5. Awaitility
