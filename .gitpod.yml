@@ -5,13 +5,13 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - name: Setup SDK
-    init: sdk install java 17.0.7-tem
-    command: mvn install -DskipTests=true
+  - name: Setup & Build
+    before: sdk install java 19-tem < /dev/null
+    init: mvn install -DskipTests=true
 vscode:
   extensions:
     - redhat.java
     - vscjava.vscode-java-test
- 
+    - ms-azuretools.vscode-docker
 
 
