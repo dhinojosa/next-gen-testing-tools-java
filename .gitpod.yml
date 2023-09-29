@@ -10,8 +10,10 @@ tasks:
     init: mvn install -DskipTests=true
 vscode:
   extensions:
-    - redhat.java
-    - vscjava.vscode-java-test
-    - ms-azuretools.vscode-docker
-
-
+    - "vscjava.vscode-java-pack"
+    - "redhat.fabric8-analytics"
+    - "redhat.java"
+    - "vscjava.vscode-java-debug"
+    - "vscjava.vscode-java-test"
+    - "vscjava.vscode-java-dependency"
+    - "vscjava.vscode-maven"
