@@ -1,5 +1,6 @@
 package com.evolutionnext.awaitility;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,27 +44,12 @@ public class AwaitilityTest {
 
     @Test
     void testBasicFutureWithAwaitilityAndHamcrest() {
-        await().until(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return integerFuture.get();
-            }
-        }, equalTo(30));
+        await().until(() -> integerFuture.get(), equalTo(30));
     }
 
     @Test
     void testBasicFutureWithAwaitilityAndBoolean() {
-        await().until(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return integerFuture.get();
-            }
-        }, new Predicate<Integer>() {
-            @Override
-            public boolean test(Integer integer) {
-                return integer == 30;
-            }
-        });
+        await().until(() -> integerFuture.get(), integer -> integer == 30);
     }
 
     @Test
@@ -74,5 +60,13 @@ public class AwaitilityTest {
     @Test
     void testBasicFutureWithAwaitilityAndForcingAssertJ() {
         await().untilAsserted(() -> assertThat(integerFuture.get()).isEqualTo(30));
+    }
+
+    @Test
+    void testWithServiceAndAssertJ() {
+        MyService myService = new MyService();
+        StudentId studentId = new StudentId("33-1329");
+        myService.addStudent(new Student(studentId, "Dilip", "Thomas"));
+        await("student to be stored").until(() -> myService.getStudent(studentId).isPresent(), equalTo(true));
     }
 }
