@@ -8,10 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("NewClassNamingConvention")
 public class CaesarShiftProperty {
-    @Property
+    @Property()
     void verifyThatCaesarShiftWorksForAllAlpha(
         @ForAll @AlphaChars String string,
         @ForAll int shift) {
+        System.out.printf("string: %s, shift: %d%n", string, shift);
         assertThat(
             CaesarShift.decode(CaesarShift.encode(string, shift), shift))
             .isEqualTo(string);
