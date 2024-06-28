@@ -20,8 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class KafkaIntegrationTest {
 
     @Container
-    private static KafkaContainer kafka =
-        new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:6.2.1"));
+    private static final KafkaContainer kafka =
+        new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.6.1"));
 
     @Test
     void testProduceAndConsumer() throws InterruptedException {
