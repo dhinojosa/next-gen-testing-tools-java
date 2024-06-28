@@ -262,7 +262,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.12</version>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
@@ -296,7 +296,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.12</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -309,7 +309,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.9.0</version>
+                <version>1.16.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
