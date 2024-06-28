@@ -67,6 +67,8 @@ public class AwaitilityTest {
         MyService myService = new MyService();
         StudentId studentId = new StudentId("33-1329");
         myService.addStudent(new Student(studentId, "Dilip", "Thomas"));
-        await("student to be stored").until(() -> myService.getStudent(studentId).isPresent(), equalTo(true));
+        await("student to be stored")
+            .until(() -> myService.getStudent(studentId).isPresent(),
+                equalTo(true));
     }
 }
