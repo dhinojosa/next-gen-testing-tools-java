@@ -8,6 +8,15 @@ import static org.assertj.core.api.Fail.fail;
 
 public class CaesarShiftTest {
 
+    //Zombies
+    //Zero
+    //One
+    //Many
+    //Boundary
+    //Interface
+    //Exception
+    //Simplify
+
     /**
      * Input: word(String)
      * Input: shift (int)
